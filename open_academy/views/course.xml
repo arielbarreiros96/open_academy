@@ -1,5 +1,24 @@
 <odoo>
   <data>
+    <record model="ir.ui.view" id="courses_tree_view">
+        <field name="name">courses.tree.view</field>
+        <field name="model">openacademy.course</field>
+        <field name="priority" eval="16"/>
+        <field name="arch" type="xml">
+            <tree string="Courses">
+                <field name="title"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_list_courses">
+      <field name="name">Open Courses</field>
+      <field name="res_model">openacademy.course</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem name="Courses" id="menu_courses_main" sequence="10"/>
+    <menuitem name="Courses" id="menu_courses_tree" sequence="10" parent="menu_courses_main" action="action_list_courses"/>
     <!-- explicit list view definition -->
 <!--
     <record model="ir.ui.view" id="open_academy.list">

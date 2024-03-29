@@ -1,16 +1,16 @@
 <odoo>
     <data>
-          <record id="demo_math_course" model="open_academy.course">
+          <record id="demo_math_course" model="openacademy.course">
             <field name="title">Math Course</field>
             <field name="description">This is the description of the Math course</field>
           </record>
 
-          <record id="demo_spa_course" model="open_academy.course">
+          <record id="demo_spa_course" model="openacademy.course">
             <field name="title">Spanish Course</field>
             <field name="description">This is the description of the Math course</field>
           </record>
 
-          <record id="demo_sci_course" model="open_academy.course">
+          <record id="demo_sci_course" model="openacademy.course">
             <field name="title">Science Course</field>
             <field name="description">This is the description of the Math course</field>
           </record>
