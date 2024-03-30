@@ -6,8 +6,9 @@
         <field name="priority" eval="16"/>
         <field name="arch" type="xml">
             <tree string="Courses">
-                <field name="title"/>
+                <field name="name"/>
                 <field name="description"/>
+                <field name="responsible"></field>
             </tree>
         </field>
     </record>
@@ -17,7 +18,7 @@
         <field name="priority" eval="16"/>
         <field name="arch" type="xml">
             <search>
-                <field name="title" filter_domain="['|', ('title', 'ilike', self), ('description', 'ilike', self)]"/>
+                <field name="name" filter_domain="['|', ('name', 'ilike', self), ('description', 'ilike', self)]"/>
                 <field name="description"/>
             </search>
         </field>
@@ -30,11 +31,9 @@
             <form string="Courses">
                 <group>
                     <group>
+                        <field name="name"/>
                         <separator string="General"/>
-                        <div colspan="2">
-                            <label for="title"/>
-                            <field name="title" string="Title"/>
-                        </div>
+                        <field name="responsible"/>
                     </group>
                     <notebook colspan="4">
                         <page name="description_page" string="Description">

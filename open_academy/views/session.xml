@@ -10,6 +10,22 @@
             </search>
         </field>
     </record>
+    <record model="ir.ui.view" id="sessions_tree_view">
+        <field name="name">sessions.tree.view</field>
+        <field name="model">openacademy.session</field>
+        <field name="priority" eval="16"/>
+        <field name="arch" type="xml">
+            <tree string="Courses">
+                <field name="name"/>
+                <field name="start_date"/>
+                <field name="duration"/>
+                <field name="number_of_seats"/>
+                <field name="instructor"/>
+                <field name="course"/>
+            </tree>
+        </field>
+    </record>
+
 
     <record model="ir.actions.act_window" id="action_list_sessions">
       <field name="name">Sessions</field>
