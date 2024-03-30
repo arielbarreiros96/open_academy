@@ -11,6 +11,40 @@
             </tree>
         </field>
     </record>
+    <record model="ir.ui.view" id="courses_search_view">
+        <field name="name">courses.search.view</field>
+        <field name="model">openacademy.course</field>
+        <field name="priority" eval="16"/>
+        <field name="arch" type="xml">
+            <search>
+                <field name="title" filter_domain="['|', ('title', 'ilike', self), ('description', 'ilike', self)]"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="courses_form_view">
+        <field name="name">courses.form.view</field>
+        <field name="model">openacademy.course</field>
+        <field name="priority" eval="16"/>
+        <field name="arch" type="xml">
+            <form string="Courses">
+                <group>
+                    <group>
+                        <separator string="General"/>
+                        <div colspan="2">
+                            <label for="title"/>
+                            <field name="title" string="Title"/>
+                        </div>
+                    </group>
+                    <notebook colspan="4">
+                        <page name="description_page" string="Description">
+                            <field name="description" placeholder="Course Description..."/>
+                        </page>
+                    </notebook>
+                </group>
+            </form>
+        </field>
+    </record>
 
     <record model="ir.actions.act_window" id="action_list_courses">
       <field name="name">Open Courses</field>
