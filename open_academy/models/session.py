@@ -5,7 +5,7 @@ class Session(models.Model):
     _name = 'openacademy.session'
     _description = 'Session class'
 
-    name = fields.Char(_("Name"),required=True)
+    name = fields.Char(_("Name"), required=True)
     start_date = fields.Date(_("Start Date"), default=fields.Date.context_today)
     duration = fields.Integer(_("Duration"), help=_("Duration in min"))
     number_of_seats = fields.Integer(_("Number of seats"))
@@ -18,6 +18,13 @@ class Session(models.Model):
     _sql_constraints = [
         ('check_number_of_seats', 'CHECK (number_of_seats <= 50)', 'No session can have more than 50 seats'),
     ]
+
+    def copy(self, default=None):
+        if default is None:
+            default = {}
+        if not default.get('name'):
+            default['name'] = _("%s (copy)", self.name)
+        return super(Session, self).copy(default)
 
     @api.depends('attendees_ids')
     def _compute_taken_seats(self):
