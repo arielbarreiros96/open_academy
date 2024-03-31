@@ -9,4 +9,4 @@ class Session(models.Model):
     duration = fields.Integer(_("Duration"),help=_("Duration in min"))
     number_of_seats = fields.Integer(_("Number of seats"))
     instructor = fields.Many2one("res.partner", string=_("Instructor"))
-    course = fields.Many2one('openacademy.course', _("Course"))
+    course_id = fields.Many2one('openacademy.course', _("Course"))

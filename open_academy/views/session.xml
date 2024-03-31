@@ -21,7 +21,7 @@
                 <field name="duration"/>
                 <field name="number_of_seats"/>
                 <field name="instructor"/>
-                <field name="course"/>
+                <field name="course_id"/>
             </tree>
         </field>
     </record>

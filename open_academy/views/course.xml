@@ -36,6 +36,9 @@
                         <field name="responsible"/>
                     </group>
                     <notebook colspan="4">
+                        <page name="sessions_page" string="Sessions">
+                            <field name="session_ids"/>
+                        </page>
                         <page name="description_page" string="Description">
                             <field name="description" placeholder="Course Description..."/>
                         </page>

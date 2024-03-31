@@ -7,3 +7,4 @@ class Course(models.Model):
     name = fields.Char(_("Name"), required=True)
     description = fields.Char()
     responsible = fields.Many2one('res.users', _("Responsible"))
+    session_ids = fields.One2many('openacademy.session', 'course_id', string=_("Sessions"))
