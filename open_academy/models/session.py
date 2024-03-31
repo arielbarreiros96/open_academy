@@ -1,4 +1,5 @@
 from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 
 class Session(models.Model):
     _name = 'openacademy.session'
@@ -21,6 +22,11 @@ class Session(models.Model):
                 record.taken_seats = 100*(len(record.attendees_ids)/record.number_of_seats)
             else:
                 record.taken_seats = 0
+
+    @api.onchange('attendees_ids')
+    def _onchange_attendees(self):
+        if len(self.attendees_ids) > self.number_of_seats:
+            raise ValidationError(_("The max number of seats for session %s is %s") % (self.name, self.number_of_seats))
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
