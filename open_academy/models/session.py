@@ -8,6 +8,7 @@ class Session(models.Model):
     start_date = fields.Date(_("Start Date"))
     duration = fields.Integer(_("Duration"), help=_("Duration in min"))
     number_of_seats = fields.Integer(_("Number of seats"))
+    # This shuould be a many2many, or the session_instructor_ids on res_partner should be a one2many related to this one
     instructor = fields.Many2one("res.partner", string=_("Instructor"))
     course_id = fields.Many2one('openacademy.course', _("Course"))
     attendees_ids = fields.Many2many('res.partner', 'attendees_partner_rel', string=_("Attendees"))
@@ -19,5 +20,11 @@ class ResPartner(models.Model):
     session_ids = fields.Many2many(
         'openacademy.session',
         'attendees_partner_rel',
-        string='Sessions'
+        string=_('Sessions')
+    )
+    instructor = fields.Boolean(_("Instructor"))
+    #Esto debería ser un one2many relacionado al campo instructor
+    session_instructor_ids = fields.Many2many(
+        'openacademy.session',
+        string=_('Instructs on')
     )
