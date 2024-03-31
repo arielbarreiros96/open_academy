@@ -23,10 +23,16 @@ class Session(models.Model):
             else:
                 record.taken_seats = 0
 
-    @api.onchange('attendees_ids')
+    @api.onchange('attendees_ids, number_of_seats')
     def _onchange_attendees(self):
         if len(self.attendees_ids) > self.number_of_seats:
             raise ValidationError(_("The max number of seats for session %s is %s") % (self.name, self.number_of_seats))
+
+    @api.constrains('attendees_ids', 'instructor')
+    def _check_instructor(self):
+        for record in self:
+            if record.instructor in record.attendees_ids:
+                raise ValidationError(_("Instructor is on the attendees list!!"))
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
