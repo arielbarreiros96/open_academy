@@ -15,6 +15,10 @@ class Session(models.Model):
     course_id = fields.Many2one('openacademy.course', _("Course"))
     attendees_ids = fields.Many2many('res.partner', 'attendees_partner_rel', string=_("Attendees"))
 
+    _sql_constraints = [
+        ('check_number_of_seats', 'CHECK (number_of_seats <= 50)', 'No session can have more than 50 seats'),
+    ]
+
     @api.depends('attendees_ids')
     def _compute_taken_seats(self):
         for record in self:
