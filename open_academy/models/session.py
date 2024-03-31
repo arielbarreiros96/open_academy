@@ -5,7 +5,7 @@ class Session(models.Model):
     _description = 'Session class'
 
     name = fields.Char(_("Name"),required=True)
-    start_date = fields.Date(_("Start Date"))
+    start_date = fields.Date(_("Start Date"), default=fields.Date.context_today)
     duration = fields.Integer(_("Duration"), help=_("Duration in min"))
     number_of_seats = fields.Integer(_("Number of seats"))
     taken_seats = fields.Float(_("Taken Seats"), compute='_compute_taken_seats')
