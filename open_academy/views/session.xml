@@ -26,6 +26,33 @@
         </field>
     </record>
 
+    <record model="ir.ui.view" id="sessions_form_view">
+        <field name="name">sessions.form.view</field>
+        <field name="model">openacademy.session</field>
+        <field name="priority" eval="16"/>
+        <field name="arch" type="xml">
+            <form string="Session">
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="start_date"/>
+                        <field name="duration"/>
+                    </group>
+                    <group>
+                        <field name="number_of_seats"/>
+                        <field name="instructor"/>
+                        <field name="course_id"/>
+                    </group>
+                    <notebook colspan="4">
+                        <page name="attendees_page" string="Attendees">
+                            <field name="attendees_ids"/>
+                        </page>
+                    </notebook>
+                </group>
+            </form>
+        </field>
+    </record>
+
 
     <record model="ir.actions.act_window" id="action_list_sessions">
       <field name="name">Sessions</field>
