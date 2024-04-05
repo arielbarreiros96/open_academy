@@ -19,7 +19,7 @@
                 <field name="name"/>
                 <field name="start_date"/>
                 <field name="duration"/>
-                <field name="number_of_seats"/>
+                <field name="number_of_seats" groups="open_academy.group_openacademy_admin"/>
                 <field name="taken_seats" widget="progressbar"/>
                 <field name="instructor"/>
                 <field name="course_id"/>
@@ -40,7 +40,7 @@
                         <field name="duration"/>
                     </group>
                     <group>
-                        <field name="number_of_seats"/>
+                        <field name="number_of_seats" groups="open_academy.group_openacademy_admin"/>
                         <field name="instructor" domain="[('instructor', '=', True)]"/>
                         <field name="course_id"/>
                     </group>
