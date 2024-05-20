@@ -1,0 +1,147 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="session_search_view">
+        <field name="name">session.search.view</field>
+        <field name="model">openacademy.session</field>
+        <field name="priority" eval="16"/>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="sessions_tree_view">
+        <field name="name">sessions.tree.view</field>
+        <field name="model">openacademy.session</field>
+        <field name="priority" eval="16"/>
+        <field name="arch" type="xml">
+            <tree string="Courses">
+                <field name="name"/>
+                <field name="start_date"/>
+                <field name="duration"/>
+                <field name="number_of_seats" groups="open_academy.group_openacademy_admin"/>
+                <field name="taken_seats" widget="progressbar"/>
+                <field name="instructor"/>
+                <field name="course_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="sessions_form_view">
+        <field name="name">sessions.form.view</field>
+        <field name="model">openacademy.session</field>
+        <field name="priority" eval="16"/>
+        <field name="arch" type="xml">
+            <form string="Session">
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="start_date"/>
+                        <field name="duration"/>
+                    </group>
+                    <group>
+                        <field name="number_of_seats" groups="open_academy.group_openacademy_admin"/>
+                        <field name="instructor" domain="[('instructor', '=', True)]"/>
+                        <field name="course_id"/>
+                    </group>
+                    <notebook colspan="4">
+                        <page name="attendees_page" string="Attendees">
+                            <field name="attendees_ids"/>
+                        </page>
+                    </notebook>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="res_partner_session_instructor">
+        <field name="name">res.partner.form.instructor.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='mobile']" position="after">
+                <field name="session_ids" widget="many2many_tags" attrs="{'invisible': [('instructor', '=', True)]}"/>
+                <field name="instructor"/>
+                <field name="session_instructor_ids" widget="many2many_tags" attrs="{'invisible': [('instructor', '=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- <record model="ir.ui.view" id="res_partner_session_instructor">
+      <field name="name">res_partner_session_instructor</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="field[@name='mobile']" position="after">
+            <field name="session_ids" widget="many2many_tags"/>
+            <field name="instructor"/>
+            <field name="session_instructor_ids" widget="many2many_tags"/>
+        </xpath>>
+      </field>
+    </record> -->
+
+
+    <record model="ir.actions.act_window" id="action_list_sessions">
+      <field name="name">Sessions</field>
+      <field name="res_model">openacademy.session</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem name="Sessions" id="menu_sessions_tree" sequence="10" parent="open_academy.menu_courses_main" action="action_list_sessions"/>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="open_academy.list">
+      <field name="name">open_academy list</field>
+      <field name="model">open_academy.open_academy</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="open_academy.action_window">
+      <field name="name">open_academy window</field>
+      <field name="res_model">open_academy.open_academy</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="open_academy.action_server">
+      <field name="name">open_academy server</field>
+      <field name="model_id" ref="model_open_academy_open_academy"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="open_academy" id="open_academy.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="open_academy.menu_1" parent="open_academy.menu_root"/>
+    <menuitem name="Menu 2" id="open_academy.menu_2" parent="open_academy.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="open_academy.menu_1_list" parent="open_academy.menu_1"
+              action="open_academy.action_window"/>
+    <menuitem name="Server to list" id="open_academy" parent="open_academy.menu_2"
+              action="open_academy.action_server"/>
+-->
+  </data>
+</odoo>
